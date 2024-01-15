@@ -4,12 +4,38 @@
         <link rel="shortcut icon" type="image/x-icon" href="./favicon.gif">
     </header>
     <body style="overflow:hidden; background-color: #cecece;">
-        <video src="./video.mp4" loop autoplay muted width="100%" id="video"></video>
-        <audio src="./audio.mp3" loop autoplay="autoplay" id="audio"></audio>
+        <video src="./0.mp4" loop autoplay muted width="100%" id="video"></video>
         <script>
+            var welcome = false;
+            var low = new Audio('./0.mp3');
+            var high = new Audio('./1.mp3');
+            var bit = new Audio('./2.mp3');
+
+            low.volume = 1;
+            high.volume = 0;
+            bit.volume = 0;
             document.querySelector('body').addEventListener('click', function() {
-                document.querySelector('audio').play();
+                switch(welcome) {
+                    case false:
+                        welcome = true;
+                        low.play();
+                        high.play();
+                        bit.play();
+
+                        low.loop = true;
+                        high.loop = true;
+                        bit.loop = true;
+
+                        break;
+                    case true:
+                        toggle();
+                        console.log(high.currentTime)
+                        break;
+
+                }
+
             });
+
             let videoSpeed = 1;
             let audioSpeed = 1;
 
@@ -18,8 +44,129 @@
                 document.querySelector("#video").playbackRate = videoSpeed;
 
                 audioSpeed = 2-(e.clientY / window.innerHeight * 2);
-                document.querySelector("#audio").playbackRate = audioSpeed;
+                low.playbackRate = audioSpeed;
+                high.playbackRate = audioSpeed;
+                bit.playbackRate = audioSpeed;
+
             }
+
+            function toggle(){
+                var cat = document.querySelector('video').src.split('/').pop().split('.')[0];
+                cat = (parseInt(cat)+1)%3;
+                document.querySelector('video').src = './' + cat + '.mp4';
+                document.querySelector('video').playbackRate = videoSpeed;
+                switch(cat) {
+                    case 0:
+                        low.volume = 1;
+                        high.volume = 0;
+                        bit.volume = 0;
+                        break;
+                    case 1:
+                        low.volume = 0;
+                        high.volume = 1;
+                        bit.volume = 0;
+                        break;
+                    case 2:
+                        low.volume = 0;
+                        high.volume = 0;
+                        bit.volume = 1;
+                        break;
+                }
+            }
+
+            setInterval(function () {
+                var time = parseFloat(high.currentTime).toFixed(4);
+                console.log(time);
+
+                if (time >= 34 && time < 37) {
+                    document.title = "We're talking away";
+                } else if (time >= 37 && time < 38.520) {
+                    document.title = "I don't know what";
+                } else if (time >= 38.520 && time < 39.500){
+                    document.title = "I'm to say";
+                } else if (time >= 39.500 && time < 42.500) {
+                    document.title = "I'll say it anyway";
+                } else if (time >= 42.500 && time < 44.740){
+                    document.title = "Today's another day";
+                } else if (time >= 44.740 && time < 45.900){
+                    document.title = "To find you";
+                } else if (time >= 45.900 && time < 48.600){
+                    document.title = "Shying away";
+                } else if (time >= 48.600 && time < 51.300){
+                    document.title = "I'll be coming for your love, OK?";
+                } else if (time >= 51.300 && time < 55.700){
+                    document.title = "Take on me";
+                } else if (time >= 55.700 && time < 57.000){
+                    document.title = "(Take on me)";
+                } else if (time >= 57.000 && time < 61.331){
+                    document.title = "Take me on";
+                } else if (time >= 61.331 && time < 62.766){
+                    document.title = "(Take on me)";
+                } else if (time >= 62.766 && time < 67.386){
+                    document.title = "I'll be gone";
+                } else if (time >= 67.386 && time < 73.500){
+                    document.title = "In a day or two";
+                } else if (time >= 73.500 && time < 76.760){
+                    document.title = "So needless to say";
+                } else if (time >= 76.760 && time < 78.600){
+                    document.title = "I'm odds and ends";
+                } else if (time >= 78.600 && time < 79.700){
+                    document.title = "But I'll be";
+                } else if (time >= 79.700 && time<82.500){
+                    document.title = "Stumbling away";
+                } else if (time >= 82.500 && time < 85.480){
+                    document.title = "Slowly learning that life is OK";
+                } else if (time >= 85.480 && time < 88.650){
+                    document.title = "Say after me";
+                } else if (time >=88.650 && time <91.250){
+                    document.title = "It's no better to be safe than sorry";
+                } else if (time >= 91.210 && time <95.460){
+                    document.title = "Take on me";
+                } else if(time >= 95.460 && time < 96.900){
+                    document.title = "(Take on me)";
+                } else if(time >= 96.900 && time < 101.135){
+                    document.title = "Take me on";
+                } else if (time >= 101.135 && time <102.630){
+                    document.title = "(Take on me)";
+                } else if (time >=102.630 && time<107.135){
+                    document.title = "I'll be gone";
+                } else if (time >= 107.135 && time <114.080){
+                    document.title = "In a day or two";
+                } else if (time >= 114.080 && time < 153.750){ 
+                    document.title = "🎵";
+                } else if (time >= 153.750 && time < 156.300){
+                    document.title = "All the things that you say, yeah";
+                } else if (time >= 156.300 && time < 158.218){
+                    document.title = "Is it life or";
+                } else if (time >= 158.218 && time < 159.250){
+                    document.title = "Just to play";
+                } else if (time >= 159.250 && time < 162.170){
+                    document.title = "My worries away";
+                } else if (time >= 162.170 && time < 165.270){
+                    document.title = "You're all the things I've got to remember";
+                } else if (time >= 165.270 && time < 168.000){
+                    document.title = "You're shying away";
+                } else if (time >= 168.000 && time < 170.800){
+                    document.title = "I'll be coming for you anyway";
+                } else if (time >= 170.800 && time < 175.100){
+                    document.title = "Take on me";
+                } else if (time >= 175.100 && time < 176.600){
+                    document.title = "(Take on me)";
+                } else if (time >= 176.600 && time < 180.800){
+                    document.title = "Take me on";
+                } else if (time >= 180.800 && time < 182.270){
+                    document.title = "(Take on me)";
+                } else if (time >= 182.270 && time < 187.190){
+                    document.title = "I'll be gone";
+                } else if (time >= 187.190 && time < 193.610){
+                    document.title = "In a day";
+                } else {
+                    document.title = "Chat";
+                }
+            
+            }, 100);
+
+            window.addEventListener('keydown', toggle);
         </script>
     </body>
 </html>
